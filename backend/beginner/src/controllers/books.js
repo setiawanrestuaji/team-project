@@ -13,14 +13,18 @@ const books = {
     })
   },
   getDetail: (req, res) => {
-    const id = req.params.id_buku
-    booksModel.getDetail(id)
-    .then((result) => {
-      success(res, result, 'Get detail book success')
-    })
-    .catch((err) => {
-      failed(res, [], err.message)
-    })
+    try {
+      const id = req.params.id_buku
+      booksModel.getDetailss(id)
+      .then((result) => {
+        success(res, result, 'Get detail book success')
+      })
+      .catch((err) => {
+        failed(res, [], err.message)
+      }) 
+    } catch (error) {
+      failed(res, [], 'Internal server error')
+    }
   },
   insert: (req, res) => {
     const body = req.body
@@ -36,6 +40,17 @@ const books = {
     const id = req.params.id_buku
     const body = req.body
     booksModel.update(body, id)
+    .then((result) => {
+      success(res, result, 'Update books success')
+    })
+    .catch((err) => {
+      failed(res, [], err.message)
+    })
+  },
+  updatePatch: (req, res) => {
+    const id = req.params.id_buku
+    const body = req.body
+    booksModel.updatePatch(body, id)
     .then((result) => {
       success(res, result, 'Update books success')
     })

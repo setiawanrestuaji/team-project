@@ -14,7 +14,7 @@ const books = {
   },
   getDetail: (id) => {
     return new Promise((resolve, reject) => {
-      db.query(`SELECT * FROM books WHERE id='${id}'`, (err, result) => {
+      db.query(`SELECT * FROM books WHERE id= ?`, id, (err, result) => {
         if(err){
           reject(new Error(err))
         }else{
@@ -44,6 +44,17 @@ const books = {
         author='${data.author}'
         WHERE id='${id}'
       `, (err, result) => {
+        if(err){
+          reject(new Error(err))
+        }else{
+          resolve(result)
+        }
+      })
+    })
+  },
+  updatePatch: (data, id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`UPDATE books SET ? WHERE id = ?`, [data, id], (err, result) => {
         if(err){
           reject(new Error(err))
         }else{

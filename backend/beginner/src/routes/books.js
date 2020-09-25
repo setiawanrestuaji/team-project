@@ -8,6 +8,7 @@ router
   .get('/getdetail/:id_buku', booksController.getDetail)
   .post('/insert', booksController.insert)
   .put('/update/:id_buku', booksController.update)
+  .patch('/update/:id_buku', booksController.updatePatch)
   .delete('/delete/:id', booksController.destroy)
 
 module.exports = router
